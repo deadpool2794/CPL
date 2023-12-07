@@ -4,12 +4,12 @@
 
 #define MAX_RECORD_LENGTH 100
 
-#define MAX_LINES 1000000 // Maximum number of lines in the file
+#define MAX_LINES 1000000 // Maximum number of records in the file
 
-char *lines[MAX_LINES]; // Array to store lines from the file
+char *records[MAX_LINES]; // Array to store records from the file
 int mid; // Variable to store the middle index
 
-// Function to read data from the file and store it in the lines array
+// Function to read data from the file and store it in the records array
 int getData(){
     FILE *file;
     int ind = 0;
@@ -25,15 +25,15 @@ int getData(){
     // Read and store each line
     while (ind < MAX_LINES)
     {
-        lines[ind] = malloc(MAX_RECORD_LENGTH * sizeof(char));
-        if (fgets(lines[ind], MAX_RECORD_LENGTH, file) == NULL)
+        records[ind] = malloc(MAX_RECORD_LENGTH * sizeof(char));
+        if (fgets(records[ind], MAX_RECORD_LENGTH, file) == NULL)
             break;
         ind++;
     }
 
     // Close the file
     fclose(file);
-    return ind; // Return the number of lines read
+    return ind; // Return the number of records read
 }
 
 // Function to calculate the average of two numbers
@@ -54,7 +54,7 @@ int compareStrings(const char *s1, const char *s2, int n)
     return 0; // Strings are equal
 }
 
-// Function to perform binary search on the lines array
+// Function to perform binary search on the records array
 void binarySearch(int len){
     int low = 0, high = len - 1;
     int leftBoundary = -1, rightBoundary = -1;
@@ -66,13 +66,14 @@ void binarySearch(int len){
     while (low <= high)
     {
         avg(low, high); // Calculate the middle index
-        if (compareStrings(lines[mid], key, strlen(key)) < 0)
+        // printf("%p\n", &mid); // print the address of mid
+        if (compareStrings(records[mid], key, strlen(key)) < 0)
             low = mid + 1; // Update the lower bound
         else
             high = mid - 1; // Update the upper bound
     }
 
-    if (low == len || compareStrings(lines[low], key, strlen(key)) != 0)
+    if (low == len || compareStrings(records[low], key, strlen(key)) != 0)
     {
         printf("Key not found.\n");
         return;
@@ -84,7 +85,7 @@ void binarySearch(int len){
     while (low <= high)
     {
         avg(low, high); // Calculate the middle index
-        if (compareStrings(lines[mid], key, strlen(key)) <= 0)
+        if (compareStrings(records[mid], key, strlen(key)) <= 0)
             low = mid + 1; // Update the lower bound
         else
             high = mid - 1; // Update the upper bound
@@ -92,16 +93,16 @@ void binarySearch(int len){
 
     rightBoundary = low - 1; // Set the right boundary
 
-    // Print the lines containing the key
+    // Print the records containing the key
     for (int i = leftBoundary; i <= rightBoundary; ++i)
-        printf("%s", lines[i]);
+        printf("%s", records[i]);
 }
 
 int main()
 {
     int len = getData(); // Read data from the file
     int mid = -1; // Initialize the middle index
-
+    // printf("local variable address : %p\n", &mid); // print the address of mid
     // Perform binary search
     binarySearch(len);
 
@@ -110,7 +111,7 @@ int main()
     // Free the allocated memory
     for (int i = 0; i < len; i++)
     {
-        free(lines[i]);
+        free(records[i]);
     }
 
     return 0;
