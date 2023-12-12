@@ -10,7 +10,7 @@ The main function begins by calling `getData()`, which presumably reads data fro
 
 There are two variables named mid. One of these variables is likely used to store the middle index of the search space during the binary search. The other variable is declared to explain static scoping.
 
-The `binarySearch(len)` function is invoked to execute a binary search on the data in C.Since binarySearch is defined as a class method, it can be accessed using the dot `.` operator without the necessity of passing any arguments explicitly. This function/method performs two individual binary searches: one to find the first occurrence and another to find the last occurrence of a name containing a prefix that matches the key. It then prints all the records from the first to the last occurrence.
+The `binarySearch(len)` function is invoked to execute a binary search on the data in C. Since binarySearch is defined as a class method, it can be accessed using the dot `.` operator without the necessity of passing any arguments explicitly in Python. This function/method performs two individual binary searches: one to find the first occurrence and another to find the last occurrence of a name containing a prefix that matches the key. It then prints all the records from the first to the last occurrence.
 
 
 Note: Comparision is case sensitive. populateDataset.py is used to create "dataset.txt" file. Executing this program would create dataset.txt file in the current directory containing 970K "Name:PhoneNumber" records which can be used to test binarySearch functions in both the files.
